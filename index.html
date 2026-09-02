@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECO SPENSASED - Pahlawan Lingkungan</title>
+    <style>
+        /* ===== RESET & GLOBAL ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            background-image: url('https://cdn.pixabay.com/photo/2020/04/15/14/20/cartoon-5046887_1280.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #87CEEB;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(1.5px);
+            z-index: 0;
+        }
+        .game-container {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(6px);
+            border-radius: 48px 48px 32px 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            padding: 28px 30px 35px;
+            border: 4px solid #2e7d32;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ----- DASHBOARD / LOGIN ----- */
+        #dashboard {
+            text-align: center;
+            padding: 20px 10px 30px;
+        }
+
+        .logo-animated {
+            display: inline-block;
+            background: linear-gradient(145deg, #1b5e20, #2e7d32, #1b5e20);
+            background-size: 300% 300%;
+            padding: 24px 40px 20px 40px;
+            border-radius: 80px 80px 40px 40px;
+            box-shadow: 0 16px 0 #0d3b0e, 0 20px 40px rgba(0,0,0,0.3);
+            border: 4px solid #ffca28;
+            position: relative;
+            margin-bottom: 30px;
+            animation: gradientShift 4s ease-in-out infinite, floatLogo 3s ease-in-out infinite;
+            transition: transform 0.3s;
+        }
+        .logo-animated:hover {
+            transform: scale(1.03) rotate(-1deg);
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes floatLogo {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        .logo-animated .leaf-left,
+        .logo-animated .leaf-right {
+            position: absolute;
+            font-size: 3rem;
+            animation: spinLeaf 6s linear infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        .logo-animated .leaf-left { left: -30px; top: 10px; animation-delay: 0s; }
+        .logo-animated .leaf-right { right: -30px; bottom: 10px; animation-delay: 3s; }
+        @keyframes spinLeaf {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        .logo-animated .earth-icon {
+            font-size: 4.2rem;
+            display: inline-block;
+            animation: spinEarth 10s linear infinite;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+            margin-right: 6px;
+        }
+        @keyframes spinEarth {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .logo-animated .logo-text {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: left;
+            line-height: 1;
+        }
+        .logo-animated .logo-text .eco {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #a5d6a7;
+            text-shadow: 3px 3px 0 #0d3b0e, 0 0 20px rgba(165, 214, 167, 0.4);
+            letter-spacing: 2px;
+            display: block;
+        }
+        .logo-animated .logo-text .spensased {
+            font-size: 3.6rem;
+            font-weight: 900;
+            color: #ffca28;
+            text-shadow: 3px 3px 0 #e65100, 0 0 30px rgba(255, 202, 40, 0.3);
+            letter-spacing: 4px;
+            display: block;
+            margin-top: -6px;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0% { text-shadow: 3px 3px 0 #e65100, 0 0 20px rgba(255, 202, 40, 0.2); }
+            50% { text-shadow: 3px 3px 0 #e65100, 0 0 40px rgba(255, 202, 40, 0.8), 0 0 80px rgba(255, 202, 40, 0.4); }
+            100% { text-shadow: 3px 3px 0 #e65100, 0 0 20px rgba(255, 202, 40, 0.2); }
+        }
+        .logo-animated .slogan {
+            font-size: 1.2rem;
+            color: #fff;
+            background: rgba(0,0,0,0.25);
+            padding: 4px 20px;
+            border-radius: 40px;
+            margin-top: 8px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.2);
+            display: inline-block;
+        }
+        .logo-animated .sparkle {
+            position: absolute;
+            font-size: 1.2rem;
+            animation: sparkleFloat 2s ease-in-out infinite;
+            opacity: 0.8;
+        }
+        .logo-animated .sparkle:nth-child(1) { top: -8px; left: 20%; animation-delay: 0s; }
+        .logo-animated .sparkle:nth-child(2) { top: -6px; right: 20%; animation-delay: 0.7s; }
+        .logo-animated .sparkle:nth-child(3) { bottom: -6px; left: 30%; animation-delay: 1.4s; }
+        .logo-animated .sparkle:nth-child(4) { bottom: -4px; right: 30%; animation-delay: 0.3s; }
+        @keyframes sparkleFloat {
+            0% { transform: translateY(0px) scale(1); opacity: 0.6; }
+            50% { transform: translateY(-10px) scale(1.4); opacity: 1; }
+            100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+        }
+
+        /* ----- FORM INPUT ----- */
+        #dashboard .input-area {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            align-items: center;
+            margin-top: 6px;
+        }
+        #dashboard .input-area label {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1b5e20;
+        }
+        #dashboard .input-area input {
+            padding: 14px 24px;
+            border-radius: 50px;
+            border: 3px solid #2e7d32;
+            font-size: 1.2rem;
+            width: 260px;
+            outline: none;
+            background: #f1f8e9;
+            font-family: inherit;
+        }
+        #dashboard .input-area input:focus {
+            border-color: #ffca28;
+            box-shadow: 0 0 0 4px #fff3cd;
+        }
+        #dashboard .btn-start {
+            background: #ffca28;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 40px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1b5e20;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #f9a825;
+            transition: 0.08s ease;
+            font-family: inherit;
+            border: 3px solid #f9a825;
+        }
+        #dashboard .btn-start:active {
+            transform: translateY(6px);
+            box-shadow: 0 0px 0 #f9a825;
+        }
+
+        /* ----- HEADER (setelah login) ----- */
+        .header {
+            display: none;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            padding: 14px 28px;
+            border-radius: 60px;
+            color: white;
+            margin-bottom: 24px;
+            box-shadow: 0 6px 0 #0d3b0e;
+        }
+        .header.show { display: flex; }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .header-left h1 {
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0 #0d3b0e;
+        }
+        .header-left .tag {
+            background: #ffca28;
+            color: #1b5e20;
+            padding: 2px 16px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .player-name-area {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #388e3c;
+            padding: 4px 16px 4px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .player-name-area .name-label {
+            font-weight: bold;
+            color: #ffca28;
+        }
+        .xp-display {
+            background: #ffca28;
+            color: #1b5e20;
+            padding: 4px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: inset 0 -2px 0 #f9a825;
+        }
+        .badge-display {
+            font-size: 1.8rem;
+            line-height: 1;
+            letter-spacing: 2px;
+            cursor: default;
+        }
+
+        /* ----- SLOGAN & PAPAN KAYU ----- */
+        .slogan-text {
+            display: none;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1b5e20;
+            background: rgba(232, 245, 233, 0.85);
+            padding: 8px 20px;
+            border-radius: 40px;
+            margin-bottom: 20px;
+            border: 2px dashed #66bb6a;
+            backdrop-filter: blur(2px);
+        }
+        .slogan-text.show { display: block; }
+        .slogan-text span {
+            background: #ffca28;
+            padding: 0 12px;
+            border-radius: 20px;
+            color: #1b5e20;
+        }
+
+        .wooden-sign {
+            background: linear-gradient(180deg, #8d6e63, #6d4c41);
+            border: 6px solid #4e342e;
+            border-radius: 16px;
+            padding: 14px 28px;
+            margin: 6px auto 24px;
+            display: inline-block;
+            color: #fff8e1;
+            font-size: clamp(1rem, 2.8vw, 1.8rem);
+            font-weight: bold;
+            text-shadow: 2px 2px 0 #3e2723, 0 0 10px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 0 #3e2723, inset 0 2px 12px rgba(255,255,255,0.25);
+            letter-spacing: 2px;
+            text-align: center;
+            width: auto;
+            max-width: 100%;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+            position: relative;
+            transform: rotate(-0.5deg);
+            backdrop-filter: blur(2px);
+            white-space: nowrap;
+        }
+        .wooden-sign::before,
+        .wooden-sign::after {
+            content: '🔩';
+            position: absolute;
+            font-size: 1.8rem;
+            top: -12px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+        }
+        .wooden-sign::before { left: -6px; }
+        .wooden-sign::after { right: -6px; }
+        .wooden-sign .leaf-icon {
+            font-size: 1.8rem;
+            margin: 0 10px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        .wooden-sign-wrapper {
+            text-align: center;
+            margin: 0 0 10px 0;
+        }
+
+        /* ----- NAV MISI ----- */
+        .mission-tabs {
+            display: none;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+        .mission-tabs.show { display: flex; }
+        .mission-btn {
+            background: rgba(200, 230, 201, 0.9);
+            border: 3px solid #388e3c;
+            border-radius: 40px;
+            padding: 10px 22px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            color: #1b5e20;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #388e3c;
+            transition: all 0.08s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            backdrop-filter: blur(2px);
+        }
+        .mission-btn.active {
+            background: #ffca28;
+            border-color: #f9a825;
+            box-shadow: 0 4px 0 #f9a825;
+            transform: translateY(-2px);
+        }
+        .mission-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 #388e3c;
+        }
+        .mission-btn .status-icon { font-size: 1.2rem; }
+        .btn-reset {
+            background: #ef5350;
+            border: 3px solid #c62828;
+            border-radius: 40px;
+            padding: 10px 22px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #c62828;
+            transition: 0.08s ease;
+            font-family: inherit;
+        }
+        .btn-reset:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 #c62828;
+        }
+
+        /* ----- PANEL MISI ----- */
+        .mission-panel {
+            display: none;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 28px 28px 32px;
+            border: 3px solid #2e7d32;
+            box-shadow: inset 0 0 0 2px #a5d6a7, 0 8px 24px rgba(0, 40, 0, 0.15);
+            min-height: 440px;
+        }
+        .mission-panel.show { display: block; }
+        .mission-panel h2 {
+            color: #1b5e20;
+            border-bottom: 4px dashed #a5d6a7;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.7rem;
+        }
+        .mission-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .mission-desc {
+            font-size: 1.05rem;
+            background: #e8f5e9;
+            padding: 8px 24px;
+            border-radius: 40px;
+            margin-bottom: 18px;
+            color: #1b5e20;
+            border: 2px solid #81c784;
+        }
+        .task-feedback {
+            margin-top: 16px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            min-height: 32px;
+            text-align: center;
+        }
+
+        /* ----- TASK 1 : PILAH SAMPAH (3 KATEGORI) ----- */
+        .drag-area {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+        .trash-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            min-height: 80px;
+            background: #f1f8e9;
+            padding: 16px;
+            border-radius: 32px;
+            border: 3px dashed #558b2f;
+            width: 100%;
+        }
+        .trash-item {
+            background: white;
+            border-radius: 30px;
+            padding: 8px 18px;
+            font-size: 2.2rem;
+            box-shadow: 0 4px 0 #bdbdbd;
+            cursor: grab;
+            transition: 0.08s;
+            border: 3px solid #6d4c41;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .trash-item:active { cursor: grabbing; opacity: 0.6; }
+        .trash-item.dragging { opacity: 0.3; }
+        .trash-item .label {
+            font-size: 0.7rem;
+            background: #eee;
+            padding: 0 8px;
+            border-radius: 12px;
+            color: #333;
+        }
+        .bins {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 6px;
+        }
+        .bin {
+            padding: 16px 28px;
+            border-radius: 60px 60px 20px 20px;
+            min-width: 130px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            border: 4px solid #1b5e20;
+            box-shadow: 0 6px 0 #1b5e20;
+            transition: 0.08s;
+            font-size: 1rem;
+        }
+        .bin.organik { background: #43a047; }
+        .bin.anorganik { background: #78909c; }
+        .bin.berbahaya {
+            background: #c62828;
+            border-color: #b71c1c;
+            box-shadow: 0 6px 0 #880e4f;
+        }
+        .bin.drag-over {
+            transform: scale(1.06);
+            box-shadow: 0 0 0 4px #ffca28, 0 6px 0 #1b5e20;
+        }
+        .bin.berbahaya.drag-over {
+            box-shadow: 0 0 0 4px #ffca28, 0 6px 0 #880e4f;
+        }
+        .bin span { display: block; font-size: 2.6rem; }
+        .bin .sub { font-size: 0.7rem; font-weight: normal; }
+        .task-score {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #1b5e20;
+            margin-top: 4px;
+        }
+
+        /* ----- TASK 2 : KOMPOS (ATURAN BARU) ----- */
+        .compost-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            margin: 8px 0 12px;
+        }
+        .compost-item {
+            background: #fff3e0;
+            padding: 14px 22px;
+            border-radius: 50px;
+            font-size: 2rem;
+            border: 4px solid #8d6e63;
+            cursor: pointer;
+            transition: 0.08s;
+            box-shadow: 0 4px 0 #8d6e63;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .compost-item .label {
+            font-size: 0.7rem;
+            background: #eee;
+            padding: 0 10px;
+            border-radius: 12px;
+            color: #555;
+        }
+        .compost-item.selected {
+            background: #a5d6a7;
+            border-color: #2e7d32;
+            box-shadow: 0 4px 0 #2e7d32;
+        }
+        .compost-item.wrong {
+            background: #ef9a9a;
+            border-color: #c62828;
+            box-shadow: 0 4px 0 #c62828;
+            animation: shake 0.35s;
+        }
+        .compost-status {
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 1.05rem;
+            color: #1b5e20;
+        }
+        .compost-animation {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: 0.3s;
+        }
+        .btn-kompos {
+            background: #ffca28;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 32px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1b5e20;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #f9a825;
+            transition: 0.08s ease;
+            font-family: inherit;
+            border: 3px solid #f9a825;
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-kompos:active {
+            transform: translateY(6px);
+            box-shadow: 0 0px 0 #f9a825;
+        }
+        .btn-kompos:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 4px 0 #f9a825;
+        }
+
+        /* ----- TASK 3 : KOTA HIJAU (Kanvas & Landscape) ----- */
+        .palette-landscape {
+            width: 100%;
+            background: #f1f8e9;
+            border-radius: 28px;
+            padding: 12px 16px;
+            border: 3px solid #81c784;
+            margin-bottom: 16px;
+            box-shadow: inset 0 0 0 2px #c8e6c9;
+        }
+        .palette-landscape h4 {
+            color: #1b5e20;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            text-align: center;
+            border-bottom: 2px dashed #a5d6a7;
+            padding-bottom: 4px;
+        }
+        .palette-items-horizontal {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .palette-item-horizontal {
+            background: white;
+            border-radius: 30px;
+            padding: 6px 14px;
+            font-size: 1.6rem;
+            border: 3px solid #6d4c41;
+            cursor: grab;
+            box-shadow: 0 3px 0 #bdbdbd;
+            transition: 0.08s;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            flex: 0 0 auto;
+        }
+        .palette-item-horizontal:active { cursor: grabbing; opacity: 0.6; }
+        .palette-item-horizontal .pname {
+            font-size: 0.6rem;
+            font-weight: bold;
+            color: #333;
+            background: #eee;
+            padding: 0 8px;
+            border-radius: 12px;
+        }
+        .palette-item-horizontal.good { border-color: #2e7d32; }
+        .palette-item-horizontal.bad { border-color: #c62828; }
+        .palette-item-horizontal.neutral { border-color: #f9a825; }
+
+        .city-canvas-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .city-canvas {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background: #a5d6a7;
+            background-image: radial-gradient(circle, #81c784 2px, transparent 2px);
+            background-size: 30px 30px;
+            border-radius: 28px;
+            border: 4px solid #2e7d32;
+            position: relative;
+            box-shadow: inset 0 0 0 4px #c8e6c9, 0 6px 0 #1b5e20;
+            transition: background 0.2s;
+            overflow: hidden;
+        }
+        .city-canvas.canvas-drag-over {
+            background: #81c784;
+            border-color: #ffca28;
+            box-shadow: 0 0 0 6px #fff3cd, 0 6px 0 #1b5e20;
+        }
+        .city-placed-item {
+            position: absolute;
+            font-size: 2.4rem;
+            cursor: default;
+            user-select: none;
+            transition: 0.08s;
+            padding: 4px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .city-placed-item .remove-item {
+            font-size: 0.7rem;
+            color: #c62828;
+            background: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            font-weight: bold;
+            opacity: 0.7;
+        }
+        .city-placed-item .remove-item:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .city-stats {
+            display: flex;
+            gap: 20px;
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .city-stats .alam { color: #2e7d32; }
+        .city-stats .polusi { color: #c62828; }
+
+        .city-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 12px 0 4px;
+        }
+        .city-btn {
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #4caf50;
+            transition: 0.08s;
+            font-family: inherit;
+        }
+        .city-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 #4caf50;
+        }
+        .city-btn.save {
+            background: #ffca28;
+            color: #1b5e20;
+            border: 3px solid #f9a825;
+            box-shadow: 0 4px 0 #f9a825;
+            font-size: 1.1rem;
+        }
+        .city-btn.clear {
+            background: #ef9a9a;
+            color: #b71c1c;
+            border: 3px solid #c62828;
+            box-shadow: 0 4px 0 #c62828;
+        }
+
+        .city-result {
+            margin-top: 16px;
+            padding: 16px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-align: center;
+            width: 100%;
+            border: 3px solid #2e7d32;
+        }
+        .city-result.success {
+            background: #c8e6c9;
+            color: #1b5e20;
+            border-color: #2e7d32;
+        }
+        .city-result.fail {
+            background: #ffcdd2;
+            color: #b71c1c;
+            border-color: #c62828;
+        }
+
+        /* ----- BADGE & KOLEKSI ----- */
+        .badge-unlock {
+            background: #ffca28;
+            border-radius: 60px;
+            padding: 10px 28px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 8px 0;
+            border: 3px solid #f9a825;
+            animation: pop 0.4s ease-out;
+        }
+        .badge-collection {
+            display: none;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 3px dashed #a5d6a7;
+            text-align: center;
+        }
+        .badge-collection.show { display: block; }
+        .badge-collection h3 {
+            color: #1b5e20;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        .badge-collection .badges {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .badge-collection .badge-item {
+            font-size: 2.4rem;
+            opacity: 0.25;
+            filter: grayscale(1);
+            transition: 0.2s;
+        }
+        .badge-collection .badge-item.unlocked {
+            opacity: 1;
+            filter: grayscale(0);
+            animation: pop 0.3s ease-out;
+        }
+        .badge-collection .badge-item .bname {
+            display: block;
+            font-size: 0.6rem;
+            color: #555;
+            font-weight: bold;
+            margin-top: -4px;
+        }
+
+        /* ----- TOMBOL SERTIFIKAT ----- */
+        .certificate-btn-wrapper {
+            display: none;
+            margin-top: 16px;
+            text-align: center;
+        }
+        .certificate-btn-wrapper.show { display: block; }
+        .btn-certificate {
+            background: linear-gradient(135deg, #ffca28, #ffb300);
+            border: 4px solid #f57f17;
+            border-radius: 60px;
+            padding: 14px 40px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #4e2e00;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #f57f17;
+            transition: 0.08s ease;
+            font-family: inherit;
+            animation: pop 0.5s ease-out;
+        }
+        .btn-certificate:active {
+            transform: translateY(6px);
+            box-shadow: 0 0px 0 #f57f17;
+        }
+
+        /* ----- SERTIFIKAT (modal) ----- */
+        .certificate-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .certificate-overlay.show { display: flex; }
+        .certificate-box {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border: 8px solid #ffca28;
+            border-radius: 40px;
+            padding: 32px 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: pop 0.4s ease-out;
+            position: relative;
+        }
+        .certificate-box .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #795548;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-weight: bold;
+        }
+        .certificate-box .close-btn:hover { color: #c62828; }
+        .certificate-box .emoji-big {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 4px;
+            letter-spacing: 6px;
+        }
+        .certificate-box h2 {
+            color: #e65100;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            border-bottom: none !important;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .certificate-box .hero-name {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #1b5e20;
+            background: white;
+            padding: 6px 32px;
+            border-radius: 60px;
+            display: inline-block;
+            margin: 8px 0;
+            border: 4px solid #ffca28;
+        }
+        .certificate-box .subtitle {
+            font-size: 1.2rem;
+            color: #4e342e;
+            letter-spacing: 1px;
+        }
+        .certificate-box .badges-row {
+            font-size: 2.8rem;
+            letter-spacing: 8px;
+            margin: 8px 0;
+        }
+
+        /* ----- ANIMASI ----- */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes pop {
+            0% { transform: scale(0.6); opacity: 0; }
+            70% { transform: scale(1.08); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .pop { animation: pop 0.3s ease-out; }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 750px) {
+            .game-container { padding: 16px; }
+            .header { flex-direction: column; align-items: stretch; gap: 10px; padding: 14px 18px; }
+            .header-left h1 { font-size: 1.4rem; }
+            .header-right { justify-content: space-between; }
+            .mission-btn { padding: 8px 14px; font-size: 0.8rem; }
+            .mission-panel { padding: 18px; }
+            .mission-panel h2 { font-size: 1.3rem; }
+            .bin { min-width: 100px; padding: 12px 16px; font-size: 0.85rem; }
+            .bin span { font-size: 2rem; }
+            .trash-item { font-size: 1.8rem; padding: 6px 14px; }
+            .certificate-box { padding: 24px; }
+            .certificate-box h2 { font-size: clamp(1.3rem, 4vw, 1.6rem); }
+            .certificate-box .hero-name { font-size: 1.4rem; }
+            .city-canvas { height: 300px; }
+            .logo-animated { padding: 18px 24px 16px 24px; }
+            .logo-animated .logo-text .eco { font-size: 2.4rem; }
+            .logo-animated .logo-text .spensased { font-size: 2.8rem; }
+            .logo-animated .earth-icon { font-size: 3.2rem; }
+            .logo-animated .leaf-left, .logo-animated .leaf-right { font-size: 2.2rem; }
+            .logo-animated .leaf-left { left: -20px; }
+            .logo-animated .leaf-right { right: -20px; }
+            .wooden-sign { font-size: clamp(0.9rem, 2.5vw, 1.2rem); padding: 10px 16px; }
+            .wooden-sign::before, .wooden-sign::after { font-size: 1.4rem; top: -10px; }
+        }
+        @media (max-width: 480px) {
+            .game-container { padding: 10px; border-radius: 28px; }
+            .header-left h1 { font-size: 1.1rem; }
+            .header-left .tag { font-size: 0.6rem; padding: 0 10px; }
+            .xp-display { font-size: 0.8rem; padding: 2px 12px; }
+            .badge-display { font-size: 1.4rem; }
+            .mission-btn { font-size: 0.7rem; padding: 6px 12px; }
+            .city-stats { font-size: 0.85rem; gap: 12px; }
+            .trash-item { font-size: 1.4rem; padding: 4px 10px; }
+            .bin { min-width: 70px; padding: 8px 10px; font-size: 0.7rem; }
+            .bin span { font-size: 1.6rem; }
+            .compost-item { font-size: 1.4rem; padding: 8px 14px; }
+            .certificate-box { padding: 16px; }
+            .certificate-box h2 { font-size: clamp(1rem, 3vw, 1.3rem); }
+            .certificate-box .hero-name { font-size: 1.2rem; padding: 4px 16px; }
+            .certificate-box .badges-row { font-size: 2rem; }
+            .certificate-box .subtitle { font-size: 1rem; }
+            .city-canvas { height: 250px; }
+            .logo-animated { padding: 14px 16px 12px 16px; }
+            .logo-animated .logo-text .eco { font-size: 1.8rem; }
+            .logo-animated .logo-text .spensased { font-size: 2rem; }
+            .logo-animated .earth-icon { font-size: 2.4rem; }
+            .logo-animated .leaf-left, .logo-animated .leaf-right { font-size: 1.8rem; display: none; }
+            .logo-animated .slogan { font-size: 0.9rem; padding: 2px 14px; }
+            .logo-animated .sparkle { display: none; }
+            #dashboard .input-area input { width: 160px; font-size: 0.9rem; padding: 10px 16px; }
+            #dashboard .btn-start { padding: 10px 24px; font-size: 1rem; }
+            .wooden-sign { font-size: clamp(0.65rem, 2.5vw, 0.9rem); padding: 6px 10px; white-space: nowrap; }
+            .wooden-sign .leaf-icon { font-size: 1rem; margin: 0 4px; }
+            .wooden-sign::before, .wooden-sign::after { display: none; }
+            .btn-kompos { font-size: 1rem; padding: 8px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container" id="app">
+    <!-- ===== DASHBOARD ===== -->
+    <div id="dashboard">
+        <div class="logo-animated">
+            <span class="sparkle">✨</span>
+            <span class="sparkle">⭐</span>
+            <span class="sparkle">✨</span>
+            <span class="sparkle">🌟</span>
+            <span class="leaf-left">🌿</span>
+            <span class="leaf-right">🍃</span>
+            <span class="earth-icon">🌍</span>
+            <div class="logo-text">
+                <span class="eco">ECO</span>
+                <span class="spensased">SPENSASED</span>
+            </div>
+            <div class="slogan">♻️ Pahlawan Lingkungan</div>
+        </div>
+
+        <div class="input-area">
+            <label for="nameInput">Siapa Namamu?</label>
+            <input type="text" id="nameInput" placeholder="Masukkan nama pahlawan..." maxlength="20" />
+            <button class="btn-start" id="startBtn">🚀 Mulai!</button>
+        </div>
+    </div>
+
+    <!-- ===== GAME AREA ===== -->
+    <div id="gameArea" style="display:none;">
+
+        <header class="header show" id="header">
+            <div class="header-left">
+                <h1>🌱 ECO SPENSASED</h1>
+                <span class="tag">♻️ Pahlawan Bumi</span>
+            </div>
+            <div class="header-right">
+                <div class="player-name-area">
+                    🦸 <span class="name-label" id="playerNameDisplay">Pahlawan</span>
+                </div>
+                <div class="xp-display">⭐ XP: <span id="xpDisplay">0</span></div>
+                <div class="badge-display" id="badgeDisplay" title="Koleksi Badge">🏅</div>
+            </div>
+        </header>
+
+        <div class="slogan-text show" id="slogan">
+            🌟 <span>Hebat! Kamu benar-benar pahlawan!</span> 🌟
+        </div>
+
+        <div class="wooden-sign-wrapper">
+            <div class="wooden-sign">
+                <span class="leaf-icon">🌿</span>
+                JAGALAH BUMI UNTUK MASA DEPAN
+                <span class="leaf-icon">🌿</span>
+            </div>
+        </div>
+
+        <div class="mission-tabs show" id="missionTabs">
+            <button class="mission-btn active" data-mission="1" id="tab1">
+                <span class="status-icon" id="status1">⬜</span> 🗑️ Misi 1: Pilah Sampah
+            </button>
+            <button class="mission-btn" data-mission="2" id="tab2">
+                <span class="status-icon" id="status2">⬜</span> 🌿 Misi 2: Pahlawan Kompos
+            </button>
+            <button class="mission-btn" data-mission="3" id="tab3">
+                <span class="status-icon" id="status3">⬜</span> 🏙️ Misi 3: Bangun Kota Hijau
+            </button>
+            <button class="btn-reset" id="resetBtn">🔄 Reset Semua</button>
+        </div>
+
+        <div class="mission-panel show" id="missionPanel">
+            <div id="missionContent"></div>
+        </div>
+
+        <div class="badge-collection show" id="badgeCollection">
+            <h3>🏅 Koleksi Badge Kamu</h3>
+            <div class="badges">
+                <div class="badge-item" data-badge="master-pilah">
+                    🏅<span class="bname">Master Pilah</span>
+                </div>
+                <div class="badge-item" data-badge="petani-kompos">
+                    🏅<span class="bname">Petani Kompos</span>
+                </div>
+                <div class="badge-item" data-badge="arsitek-hijau">
+                    🏅<span class="bname">Arsitek Hijau</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="certificate-btn-wrapper" id="certificateBtnWrapper">
+            <button class="btn-certificate" id="certificateBtn">🎓 Lihat Sertifikat</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== OVERLAY SERTIFIKAT ===== -->
+<div class="certificate-overlay" id="certificateOverlay">
+    <div class="certificate-box">
+        <button class="close-btn" id="closeCertBtn">✕</button>
+        <span class="emoji-big">🎺🏆🌟🏆🎺</span>
+        <h2>SERTIFIKAT PENGHARGAAN</h2>
+        <div style="font-size:1.1rem; color:#4e342e;">Diberikan kepada:</div>
+        <div class="hero-name" id="certName">Pahlawan</div>
+        <div class="subtitle">🎺 Pahlawan Penyelamat Lingkungan 🎺</div>
+        <div class="badges-row" id="certBadges">🏅🏅🏅</div>
+    </div>
+</div>
+
+<script>
+    // ================================================================
+    //  STATE
+    // ================================================================
+    const state = {
+        playerName: '',
+        xp: 0,
+        badges: [],
+        missionDone: [false, false, false],
+
+        // ----- TASK 1 : PILAH SAMPAH (3 KATEGORI) -----
+        trashItems: [
+            { id: 'daun', label: '🍂', type: 'organik', name: 'Daun' },
+            { id: 'kertas', label: '📄', type: 'organik', name: 'Kertas' },
+            { id: 'kulitpisang', label: '🍌', type: 'organik', name: 'Kulit Pisang' },
+            { id: 'sisa', label: '🥗', type: 'organik', name: 'Sisa Makanan' },
+            { id: 'plastik', label: '🥤', type: 'anorganik', name: 'Plastik' },
+            { id: 'botol', label: '🍾', type: 'anorganik', name: 'Botol' },
+            { id: 'kaleng', label: '🥫', type: 'anorganik', name: 'Kaleng' },
+            { id: 'baterai', label: '🔋', type: 'berbahaya', name: 'Baterai Bekas' },
+            { id: 'aki', label: '🔌', type: 'berbahaya', name: 'Aki Kendaraan' },
+            { id: 'lampu', label: '💡', type: 'berbahaya', name: 'Lampu Rusak' },
+            { id: 'obat', label: '💊', type: 'berbahaya', name: 'Obat Kadaluwarsa' }
+        ],
+        trashRemaining: [],
+        task1Score: 0,
+        task1Total: 11,
+        task1Complete: false,
+
+        // ----- TASK 2 : KOMPOS -----
+        compostItems: [
+            { id: 'daun', label: '🍂', isOrganic: true, name: 'Daun' },
+            { id: 'kulit', label: '🍌', isOrganic: true, name: 'Kulit Pisang' },
+            { id: 'ranting', label: '🌿', isOrganic: true, name: 'Ranting' },
+            { id: 'sisa_makanan', label: '🍲', isOrganic: true, name: 'Sisa Makanan' },
+            { id: 'sisa_sayuran', label: '🥬', isOrganic: true, name: 'Sisa Sayuran' },
+            { id: 'plastik', label: '🛍️', isOrganic: false, name: 'Plastik' },
+            { id: 'baterai', label: '🔋', isOrganic: false, name: 'Baterai' },
+            { id: 'kaca', label: '🥃', isOrganic: false, name: 'Kaca' }
+        ],
+        compostSelected: [],
+        task2Complete: false,
+
+        // ----- TASK 3 : KOTA HIJAU (TAMBAH SEPEDA LISTRIK) -----
+        cityElements: [
+            { id: 'sepeda', label: '🚲', name: 'Sepeda', effect: 'good', value: 2 },
+            { id: 'sepeda_listrik', label: '🛵', name: 'Sepeda Listrik', effect: 'good', value: 2 },
+            { id: 'mobil', label: '🚗', name: 'Mobil', effect: 'bad', value: 3 },
+            { id: 'matahari', label: '☀️', name: 'Matahari', effect: 'good', value: 3 },
+            { id: 'rumah', label: '🏠', name: 'Rumah', effect: 'neutral', value: 0 },
+            { id: 'pohon', label: '🌳', name: 'Pohon', effect: 'good', value: 4 },
+            { id: 'tanaman', label: '🌱', name: 'Tanaman', effect: 'good', value: 2 },
+            { id: 'pabrik', label: '🏭', name: 'Pabrik', effect: 'bad', value: 5 },
+            { id: 'pembakaran_sampah', label: '🔥', name: 'Pembakaran Sampah', effect: 'bad', value: 4 }
+        ],
+        cityItems: [],
+        task3Complete: false,
+        task3Success: false,
+
+        currentTab: '1',
+        gameStarted: false,
+    };
+
+    // ================================================================
+    //  DOM REFS
+    // ================================================================
+    const dashboard = document.getElementById('dashboard');
+    const gameArea = document.getElementById('gameArea');
+    const nameInput = document.getElementById('nameInput');
+    const startBtn = document.getElementById('startBtn');
+    const playerNameDisplay = document.getElementById('playerNameDisplay');
+    const missionContent = document.getElementById('missionContent');
+    const xpDisplay = document.getElementById('xpDisplay');
+    const badgeDisplay = document.getElementById('badgeDisplay');
+    const badgeCollection = document.getElementById('badgeCollection');
+    const certificateBtnWrapper = document.getElementById('certificateBtnWrapper');
+    const certificateBtn = document.getElementById('certificateBtn');
+    const certOverlay = document.getElementById('certificateOverlay');
+    const closeCertBtn = document.getElementById('closeCertBtn');
+    const certName = document.getElementById('certName');
+    const certBadges = document.getElementById('certBadges');
+
+    // ================================================================
+    //  UTILITY
+    // ================================================================
+    function updateUI() {
+        xpDisplay.textContent = state.xp;
+        const count = state.badges.length;
+        badgeDisplay.textContent = count > 0 ? '🏅'.repeat(count) : '🏅';
+
+        for (let i = 1; i <= 3; i++) {
+            const icon = document.getElementById(`status${i}`);
+            if (state.missionDone[i - 1]) icon.textContent = '✅';
+            else icon.textContent = '⬜';
+        }
+
+        document.querySelectorAll('.mission-btn').forEach(b => b.classList.remove('active'));
+        const activeBtn = document.getElementById(`tab${state.currentTab}`);
+        if (activeBtn) activeBtn.classList.add('active');
+
+        const items = badgeCollection.querySelectorAll('.badge-item');
+        items.forEach(el => {
+            const id = el.dataset.badge;
+            if (state.badges.includes(id)) el.classList.add('unlocked');
+            else el.classList.remove('unlocked');
+        });
+
+        playerNameDisplay.textContent = state.playerName || 'Pahlawan';
+
+        const allBadges = ['master-pilah', 'petani-kompos', 'arsitek-hijau'];
+        const allUnlocked = allBadges.every(b => state.badges.includes(b));
+        if (allUnlocked) certificateBtnWrapper.classList.add('show');
+        else certificateBtnWrapper.classList.remove('show');
+    }
+
+    function addXP(amount) {
+        state.xp += amount;
+        updateUI();
+    }
+
+    function unlockBadge(id) {
+        if (!state.badges.includes(id)) {
+            state.badges.push(id);
+            updateUI();
+            return true;
+        }
+        return false;
+    }
+
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function showFeedback(msg, color = '#2e7d32', duration = 2500) {
+        const fb = document.getElementById('taskFeedback');
+        if (fb) {
+            fb.textContent = msg;
+            fb.style.color = color;
+            if (window._feedbackTimer) clearTimeout(window._feedbackTimer);
+            window._feedbackTimer = setTimeout(() => { if (fb) fb.textContent = ''; }, duration);
+        }
+    }
+
+    function getPlayerName() {
+        return state.playerName || 'Pahlawan Cilik';
+    }
+
+    // ================================================================
+    //  RENDER FUNCTIONS
+    // ================================================================
+    function renderMission(tabId) {
+        state.currentTab = tabId;
+        if (tabId === '1') renderTask1();
+        else if (tabId === '2') renderTask2();
+        else if (tabId === '3') renderTask3();
+        updateUI();
+    }
+
+    // ===== TASK 1 : PILAH SAMPAH =====
+    function renderTask1() {
+        if (state.task1Complete) {
+            missionContent.innerHTML = `
+                <h2>🗑️ Misi 1: Pilah Sampah</h2>
+                <div class="mission-content">
+                    <div class="mission-desc">✅ Selesai! Semua sampah terpilah dengan benar.</div>
+                    <div style="margin:10px 0; font-size:2.2rem;">🏅 Master Pilah</div>
+                    <div class="task-score">Skor: ${state.task1Score} / ${state.task1Total}</div>
+                    <button class="btn-reset" onclick="resetTask1()" style="background:#ffa726; box-shadow:0 4px 0 #ef6c00; border-color:#ef6c00; margin-top:8px;">↻ Ulangi Misi</button>
+                </div>
+            `;
+            return;
+        }
+
+        if (state.trashRemaining.length === 0) {
+            state.trashRemaining = state.trashItems.map(item => ({ ...item }));
+            shuffleArray(state.trashRemaining);
+            state.task1Score = 0;
+        }
+
+        let html = `
+            <h2>🗑️ Misi 1: Pilah Sampah</h2>
+            <div class="mission-content">
+                <div class="mission-desc">Seret setiap sampah ke tempat yang benar! 🧤</div>
+                <div class="task-score">Skor: ${state.task1Score} / ${state.task1Total}</div>
+                <div class="drag-area">
+                    <div class="trash-items" id="trashContainer">
+        `;
+
+        if (state.trashRemaining.length === 0) {
+            html += `<div style="padding:20px; color:#888; font-size:1.2rem;">✨ Semua sudah dipilah!</div>`;
+        } else {
+            state.trashRemaining.forEach((item, idx) => {
+                html += `<div class="trash-item" draggable="true" data-id="${item.id}" data-type="${item.type}" data-index="${idx}">${item.label} <span class="label">${item.name}</span></div>`;
+            });
+        }
+
+        html += `
+                    </div>
+                    <div class="bins">
+                        <div class="bin organik" id="binOrganik" data-type="organik">
+                            <span>♻️</span> ORGANIK
+                            <div class="sub">(sampah alami)</div>
+                        </div>
+                        <div class="bin anorganik" id="binAnorganik" data-type="anorganik">
+                            <span>🚮</span> ANORGANIK
+                            <div class="sub">(sampah non-alami)</div>
+                        </div>
+                        <div class="bin berbahaya" id="binBerbahaya" data-type="berbahaya">
+                            <span>☣️</span> BERBAHAYA
+                            <div class="sub">(B3 / toxic)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-feedback" id="taskFeedback"></div>
+            </div>
+        `;
+        missionContent.innerHTML = html;
+        updateUI();
+
+        if (state.trashRemaining.length === 0 && state.task1Score === state.task1Total) {
+            completeTask1();
+            return;
+        }
+
+        const items = document.querySelectorAll('.trash-item');
+        const bins = document.querySelectorAll('.bin');
+
+        items.forEach(item => {
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragend', handleDragEnd);
+        });
+
+        bins.forEach(bin => {
+            bin.addEventListener('dragover', handleDragOver);
+            bin.addEventListener('dragenter', handleDragEnter);
+            bin.addEventListener('dragleave', handleDragLeave);
+            bin.addEventListener('drop', handleDrop);
+        });
+    }
+
+    let draggedItem = null;
+
+    function handleDragStart(e) {
+        draggedItem = e.target.closest('.trash-item');
+        if (!draggedItem) return;
+        draggedItem.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', draggedItem.dataset.id);
+    }
+
+    function handleDragEnd(e) {
+        const el = e.target.closest('.trash-item');
+        if (el) el.classList.remove('dragging');
+        document.querySelectorAll('.bin').forEach(b => b.classList.remove('drag-over'));
+    }
+
+    function handleDragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
+
+    function handleDragEnter(e) {
+        e.preventDefault();
+        const bin = e.target.closest('.bin');
+        if (bin) bin.classList.add('drag-over');
+    }
+
+    function handleDragLeave(e) {
+        const bin = e.target.closest('.bin');
+        if (bin) bin.classList.remove('drag-over');
+    }
+
+    function handleDrop(e) {
+        e.preventDefault();
+        const bin = e.target.closest('.bin');
+        if (!bin) return;
+        bin.classList.remove('drag-over');
+
+        const data = e.dataTransfer.getData('text/plain');
+        const itemElem = document.querySelector(`.trash-item[data-id="${data}"]`);
+        if (!itemElem) return;
+
+        const itemType = itemElem.dataset.type;
+        const binType = bin.dataset.type;
+
+        if (itemType === binType) {
+            const id = itemElem.dataset.id;
+            state.trashRemaining = state.trashRemaining.filter(it => it.id !== id);
+            state.task1Score++;
+            itemElem.remove();
+            showFeedback('✅ Benar!', '#2e7d32', 1200);
+
+            if (state.trashRemaining.length === 0 && state.task1Score === state.task1Total) {
+                setTimeout(() => completeTask1(), 400);
+            }
+            const scoreEl = document.querySelector('.task-score');
+            if (scoreEl) scoreEl.textContent = `Skor: ${state.task1Score} / ${state.task1Total}`;
+        } else {
+            showFeedback('❌ Salah! Coba lagi.', '#c62828', 1200);
+            itemElem.style.animation = 'shake 0.35s';
+            setTimeout(() => { itemElem.style.animation = ''; }, 400);
+        }
+        updateUI();
+    }
+
+    function completeTask1() {
+        if (state.task1Complete) return;
+        state.task1Complete = true;
+        state.missionDone[0] = true;
+        addXP(50);
+        unlockBadge('master-pilah');
+        renderTask1();
+        showFeedback('🏅 Lencana Master Pilah didapat! +50 XP', '#f9a825', 3000);
+        updateUI();
+    }
+
+    function resetTask1() {
+        state.task1Complete = false;
+        state.missionDone[0] = false;
+        state.trashRemaining = state.trashItems.map(item => ({ ...item }));
+        shuffleArray(state.trashRemaining);
+        state.task1Score = 0;
+        renderMission('1');
+        updateUI();
+    }
+
+    // ===== TASK 2 : KOMPOS =====
+    function renderTask2() {
+        if (state.task2Complete) {
+            missionContent.innerHTML = `
+                <h2>🌿 Misi 2: Pahlawan Kompos</h2>
+                <div class="mission-content">
+                    <div class="mission-desc">✅ Kompos berhasil dibuat! 🌱</div>
+                    <div style="margin:10px 0; font-size:2.2rem;">🏅 Petani Kompos</div>
+                    <div class="compost-animation">🌳✨</div>
+                    <button class="btn-reset" onclick="resetTask2()" style="background:#ffa726; box-shadow:0 4px 0 #ef6c00; border-color:#ef6c00; margin-top:8px;">↻ Ulangi Misi</button>
+                </div>
+            `;
+            return;
+        }
+
+        let html = `
+            <h2>🌿 Misi 2: Pahlawan Kompos</h2>
+            <div class="mission-content">
+                <div class="mission-desc">Pilih 5 bahan alam / organik, lalu klik "Olah Kompos"</div>
+                <div class="compost-items" id="compostContainer">
+        `;
+        state.compostItems.forEach(item => {
+            const selected = state.compostSelected.includes(item.id);
+            const cls = selected ? 'selected' : '';
+            html += `<div class="compost-item ${cls}" data-id="${item.id}" data-organic="${item.isOrganic}">${item.label} <span class="label">${item.name}</span></div>`;
+        });
+        html += `
+                </div>
+                <div class="compost-status" id="compostStatus">Pilih 5 bahan organik</div>
+                <div class="compost-animation" id="compostAnim">🪴</div>
+                <button class="btn-kompos" id="btnOlahKompos">🌿 Olah Kompos</button>
+                <div class="task-feedback" id="taskFeedback"></div>
+            </div>
+        `;
+        missionContent.innerHTML = html;
+        updateUI();
+
+        document.querySelectorAll('.compost-item').forEach(el => {
+            el.addEventListener('click', function() {
+                if (state.task2Complete) return;
+                const id = this.dataset.id;
+                const isOrganic = this.dataset.organic === 'true';
+                const idx = state.compostSelected.indexOf(id);
+
+                if (idx > -1) {
+                    state.compostSelected.splice(idx, 1);
+                    this.classList.remove('selected');
+                    updateCompostStatus();
+                    return;
+                }
+
+                if (state.compostSelected.length >= 5) {
+                    showFeedback('⛔ Sudah memilih 5 bahan!', '#c62828', 1500);
+                    return;
+                }
+
+                state.compostSelected.push(id);
+                this.classList.add('selected');
+                if (isOrganic) {
+                    showFeedback('✅ Bahan organik ditambahkan', '#2e7d32', 1000);
+                } else {
+                    showFeedback('⚠️ Bahan non-organik terpilih', '#f9a825', 1000);
+                }
+                updateCompostStatus();
+                updateUI();
+            });
+        });
+
+        const btn = document.getElementById('btnOlahKompos');
+        if (btn) {
+            btn.addEventListener('click', function() {
+                if (state.task2Complete) return;
+
+                const selected = state.compostSelected;
+                const organics = selected.filter(id => {
+                    const item = state.compostItems.find(i => i.id === id);
+                    return item && item.isOrganic;
+                });
+                const nonOrganics = selected.filter(id => {
+                    const item = state.compostItems.find(i => i.id === id);
+                    return item && !item.isOrganic;
+                });
+
+                if (nonOrganics.length > 0) {
+                    showFeedback('❌ MISI GAGAL! Ada bahan non-organik yang tercampur.', '#c62828', 3000);
+                    state.compostSelected = [];
+                    renderTask2();
+                    updateUI();
+                    return;
+                }
+
+                if (organics.length === 5) {
+                    completeTask2();
+                } else if (organics.length < 5) {
+                    showFeedback(`❌ Gagal! Kurang dari 5 bahan organik (terpilih ${organics.length})`, '#c62828', 3000);
+                    state.compostSelected = [];
+                    renderTask2();
+                    updateUI();
+                } else {
+                    showFeedback('❌ Terlalu banyak bahan! Maksimal 5.', '#c62828', 3000);
+                    state.compostSelected = [];
+                    renderTask2();
+                    updateUI();
+                }
+            });
+        }
+
+        updateCompostStatus();
+    }
+
+    function updateCompostStatus() {
+        const status = document.getElementById('compostStatus');
+        if (!status) return;
+        const count = state.compostSelected.length;
+        const names = state.compostSelected.map(id => {
+            const item = state.compostItems.find(i => i.id === id);
+            return item ? item.name : '';
+        }).filter(Boolean);
+        if (count === 0) {
+            status.textContent = 'Pilih 5 bahan organik';
+        } else {
+            status.textContent = `Terpilih ${count}/5: ${names.join(', ')}`;
+        }
+
+        const anim = document.getElementById('compostAnim');
+        if (anim) {
+            if (count === 0) anim.textContent = '🪴';
+            else if (count <= 2) anim.textContent = '🌱';
+            else if (count <= 4) anim.textContent = '🌿';
+            else if (count === 5) anim.textContent = '🌳✨';
+        }
+    }
+
+    function completeTask2() {
+        if (state.task2Complete) return;
+        state.task2Complete = true;
+        state.missionDone[1] = true;
+        addXP(50);
+        unlockBadge('petani-kompos');
+        renderTask2();
+        showFeedback('🏅 Lencana Petani Kompos didapat! +50 XP', '#f9a825', 3000);
+        updateUI();
+    }
+
+    function resetTask2() {
+        state.task2Complete = false;
+        state.missionDone[1] = false;
+        state.compostSelected = [];
+        renderMission('2');
+        updateUI();
+    }
+
+    // ===== TASK 3 : KOTA HIJAU (dengan Sepeda Listrik) =====
+    function renderTask3() {
+        if (state.task3Complete && state.task3Success) {
+            missionContent.innerHTML = `
+                <h2>🏙️ Misi 3: Bangun Kota Hijau</h2>
+                <div class="mission-content">
+                    <div class="mission-desc">✅ Kota hijau berhasil dibangun! 🏆</div>
+                    <div style="margin:10px 0; font-size:2.2rem;">🏅 Arsitek Hijau</div>
+                    <div class="city-stats">
+                        <span class="alam">🌳 Alam: 100%</span>
+                        <span class="polusi">🏭 Polusi: 0%</span>
+                    </div>
+                    <button class="btn-reset" onclick="resetTask3()" style="background:#ffa726; box-shadow:0 4px 0 #ef6c00; border-color:#ef6c00; margin-top:8px;">↻ Ulangi Misi</button>
+                </div>
+            `;
+            return;
+        }
+
+        let goodPoints = 0, badPoints = 0;
+        state.cityItems.forEach(item => {
+            const el = state.cityElements.find(e => e.id === item.id);
+            if (!el) return;
+            if (el.effect === 'good') goodPoints += el.value;
+            else if (el.effect === 'bad') badPoints += el.value;
+        });
+        const total = goodPoints + badPoints + 1;
+        const alamPct = Math.min(100, Math.round((goodPoints / total) * 100));
+        const polusiPct = Math.min(100, Math.round((badPoints / total) * 100));
+        const jumlahItem = state.cityItems.length;
+
+        let html = `
+            <h2>🏙️ Misi 3: Bangun Kota Hijau</h2>
+            <div class="mission-content">
+                <div class="mission-desc">Seret elemen dari palet ke kotak hijau. Atur sesuka hati!</div>
+                <div class="city-stats">
+                    <span class="alam">🌳 Alam: ${alamPct}%</span>
+                    <span class="polusi">🏭 Polusi: ${polusiPct}%</span>
+                    <span style="color:#4e342e;">🧩 Elemen: ${jumlahItem}</span>
+                </div>
+                <div class="palette-landscape" id="cityPalette">
+                    <h4>🎨 Elemen Kota</h4>
+                    <div class="palette-items-horizontal">
+        `;
+        state.cityElements.forEach(el => {
+            const effectClass = el.effect === 'good' ? 'good' : el.effect === 'bad' ? 'bad' : 'neutral';
+            html += `
+                <div class="palette-item-horizontal ${effectClass}" draggable="true" data-id="${el.id}" data-effect="${el.effect}" data-value="${el.value}">
+                    ${el.label}
+                    <span class="pname">${el.name}</span>
+                </div>
+            `;
+        });
+        html += `
+                    </div>
+                </div>
+                <div class="city-canvas-wrapper">
+                    <div class="city-canvas" id="cityCanvas">
+        `;
+        state.cityItems.forEach(item => {
+            const el = state.cityElements.find(e => e.id === item.id);
+            if (!el) return;
+            html += `<div class="city-placed-item" style="left:${item.x}px; top:${item.y}px;" data-id="${item.id}">${el.label}<span class="remove-item" data-id="${item.id}">✕</span></div>`;
+        });
+        html += `
+                    </div>
+                </div>
+                <div class="city-controls">
+                    <button class="city-btn save" id="saveCityBtn">💾 SIMPAN KOTA</button>
+                    <button class="city-btn clear" id="clearCityBtn">🧹 Kosongkan</button>
+                </div>
+                <div id="cityResultArea"></div>
+                <div class="task-feedback" id="taskFeedback"></div>
+            </div>
+        `;
+        missionContent.innerHTML = html;
+        updateUI();
+
+        const paletteItems = document.querySelectorAll('.palette-item-horizontal');
+        const canvas = document.getElementById('cityCanvas');
+        paletteItems.forEach(item => {
+            item.addEventListener('dragstart', function(e) {
+                e.dataTransfer.setData('text/plain', this.dataset.id);
+                this.style.opacity = '0.5';
+            });
+            item.addEventListener('dragend', function(e) { this.style.opacity = '1'; });
+        });
+        canvas.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('canvas-drag-over');
+        });
+        canvas.addEventListener('dragleave', function(e) {
+            this.classList.remove('canvas-drag-over');
+        });
+        canvas.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('canvas-drag-over');
+            if (state.task3Complete) return;
+            const elementId = e.dataTransfer.getData('text/plain');
+            if (!elementId) return;
+            const el = state.cityElements.find(e => e.id === elementId);
+            if (!el) return;
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left - 30;
+            const y = e.clientY - rect.top - 30;
+            const maxX = rect.width - 60;
+            const maxY = rect.height - 60;
+            const posX = Math.min(maxX, Math.max(0, x));
+            const posY = Math.min(maxY, Math.max(0, y));
+            state.cityItems.push({ id: elementId, x: posX, y: posY });
+            renderTask3();
+            showFeedback(`✅ ${el.name} ditempatkan!`, '#2e7d32', 1000);
+            updateUI();
+        });
+
+        document.querySelectorAll('.remove-item').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (state.task3Complete) return;
+                const id = this.dataset.id;
+                state.cityItems = state.cityItems.filter(item => item.id !== id);
+                renderTask3();
+                showFeedback(`🗑️ Item dihapus`, '#f9a825', 1000);
+                updateUI();
+            });
+        });
+
+        const clearBtn = document.getElementById('clearCityBtn');
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function() {
+                if (state.task3Complete) return;
+                state.cityItems = [];
+                renderTask3();
+                showFeedback('🧹 Kota dikosongkan!', '#1b5e20', 1500);
+                updateUI();
+            });
+        }
+
+        const saveBtn = document.getElementById('saveCityBtn');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', function() {
+                if (state.task3Complete) return;
+                let gPoints = 0, bPoints = 0;
+                state.cityItems.forEach(item => {
+                    const el = state.cityElements.find(e => e.id === item.id);
+                    if (!el) return;
+                    if (el.effect === 'good') gPoints += el.value;
+                    else if (el.effect === 'bad') bPoints += el.value;
+                });
+                const resultArea = document.getElementById('cityResultArea');
+                if (gPoints > bPoints) {
+                    state.task3Success = true;
+                    state.task3Complete = true;
+                    state.missionDone[2] = true;
+                    addXP(100);
+                    unlockBadge('arsitek-hijau');
+                    resultArea.innerHTML = `
+                        <div class="city-result success">
+                            🌟 KOTA HIJAU MU SANGAT INDAH! 🌟<br>
+                            <span style="font-size:0.9rem;">Alam ${gPoints} poin vs Polusi ${bPoints} poin</span>
+                        </div>
+                    `;
+                    showFeedback('🏅 Lencana Arsitek Hijau didapat! +100 XP', '#f9a825', 3000);
+                    setTimeout(() => { renderTask3(); updateUI(); }, 800);
+                } else {
+                    resultArea.innerHTML = `
+                        <div class="city-result fail">
+                            😢 KOTAMU SANGAT KOTOR!<br>
+                            <span style="font-size:0.9rem;">Alam ${gPoints} poin vs Polusi ${bPoints} poin</span><br>
+                            <span style="font-size:0.8rem;">Coba tambah lebih banyak elemen hijau!</span>
+                        </div>
+                    `;
+                    showFeedback('❌ Polusi terlalu tinggi! Coba susun ulang.', '#c62828', 2500);
+                }
+                updateUI();
+            });
+        }
+    }
+
+    function resetTask3() {
+        state.task3Complete = false;
+        state.task3Success = false;
+        state.missionDone[2] = false;
+        state.cityItems = [];
+        renderMission('3');
+        updateUI();
+    }
+
+    // ================================================================
+    //  SERTIFIKAT
+    // ================================================================
+    function showCertificate() {
+        const name = getPlayerName();
+        certName.textContent = name;
+        const badgesStr = state.badges.map(() => '🏅').join('');
+        certBadges.textContent = badgesStr || '🏅';
+        certOverlay.classList.add('show');
+    }
+    function closeCertificate() {
+        certOverlay.classList.remove('show');
+    }
+
+    // ================================================================
+    //  RESET ALL
+    // ================================================================
+    function resetAll() {
+        state.xp = 0;
+        state.badges = [];
+        state.missionDone = [false, false, false];
+        state.trashRemaining = state.trashItems.map(item => ({ ...item }));
+        shuffleArray(state.trashRemaining);
+        state.task1Score = 0;
+        state.task1Complete = false;
+        state.compostSelected = [];
+        state.task2Complete = false;
+        state.cityItems = [];
+        state.task3Complete = false;
+        state.task3Success = false;
+        state.currentTab = '1';
+        renderMission('1');
+        updateUI();
+        showFeedback('🔄 Semua direset!', '#1b5e20', 2000);
+        closeCertificate();
+    }
+
+    // ================================================================
+    //  LOGIN / START (dengan validasi nama)
+    // ================================================================
+    function startGame() {
+        const name = nameInput.value.trim();
+        if (name === '') {
+            alert('TULIS NAMAMU DULU YA!');
+            return;
+        }
+        state.playerName = name;
+        state.gameStarted = true;
+        dashboard.style.display = 'none';
+        gameArea.style.display = 'block';
+        state.trashRemaining = state.trashItems.map(item => ({ ...item }));
+        shuffleArray(state.trashRemaining);
+        state.task1Score = 0;
+        renderMission('1');
+        updateUI();
+        playerNameDisplay.textContent = state.playerName;
+    }
+
+    // ================================================================
+    //  EVENT BINDING
+    // ================================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        startBtn.addEventListener('click', startGame);
+        nameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') startGame();
+        });
+        document.querySelectorAll('.mission-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (!state.gameStarted) return;
+                const tab = this.dataset.mission;
+                renderMission(tab);
+            });
+        });
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            if (!state.gameStarted) return;
+            resetAll();
+        });
+        certificateBtn.addEventListener('click', showCertificate);
+        closeCertBtn.addEventListener('click', closeCertificate);
+        certOverlay.addEventListener('click', function(e) {
+            if (e.target === this) closeCertificate();
+        });
+    });
+
+    // ================================================================
+    //  GLOBAL EXPOSE
+    // ================================================================
+    window.resetTask1 = resetTask1;
+    window.resetTask2 = resetTask2;
+    window.resetTask3 = resetTask3;
+    window.resetAll = resetAll;
+    window.renderMission = renderMission;
+    window.showFeedback = showFeedback;
+    window.completeTask1 = completeTask1;
+    window.completeTask2 = completeTask2;
+    window.startGame = startGame;
+    window.showCertificate = showCertificate;
+    window.closeCertificate = closeCertificate;
+</script>
+</body>
+</html>
